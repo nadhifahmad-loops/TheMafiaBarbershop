@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Mafia Barbershop — Solution for Your Hair</title>
+<link rel="icon" type="image/jpeg" href="images/logo.jpg">
+<link rel="apple-touch-icon" href="images/logo.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="style.css">
+<script>
+    // Tailwind config
+    tailwind.config = {
+    theme: {
+        extend: {
+        colors: {
+            noir: '#0a0a0a',
+            obsidian: '#111111',
+            charcoal: '#1a1a1a',
+            crimson: '#e11d48',
+            blood: '#9f1239',
+            cream: '#f5f5dc',
+            silk: '#ede8d8',
+            gold: '#c9a84c',
+        },
+        fontFamily: {
+            display: ['Playfair Display', 'serif'],
+            body: ['Barlow', 'sans-serif'],
+        },
+        }
+    }
+    }
+</script>
+</head>
+<body>
+
+<!-- ═══ ANNOUNCEMENT BAR ═══ -->
+<div id="announcement-bar" style="background: #7c1d2e; position: fixed; top: 0; left: 0; right: 0; z-index: 60;">
+  <div class="max-w-7xl mx-auto px-4 py-1.5 flex items-center justify-between gap-2">
+    <div class="flex-1 flex items-center justify-center gap-2 flex-wrap">
+      <span class="text-gold text-xs">☽</span>
+      <!-- Desktop text -->
+      <p class="hidden md:block text-cream text-xs font-body text-center">
+        <span class="font-semibold text-gold">Promo Ramadan 1446 H</span>
+        <span class="text-cream/70 mx-2">·</span>
+        Diskon <span class="text-gold font-bold">20%</span> semua layanan selama bulan Ramadan
+        <a href="#booking" class="ml-3 text-xs bg-gold text-noir font-semibold px-2.5 py-0.5 rounded-sm hover:bg-yellow-400 transition-colors whitespace-nowrap">Book Sekarang</a>
+      </p>
+      <!-- Mobile text (lebih pendek) -->
+      <p class="md:hidden text-cream text-xs font-body text-center leading-tight">
+        <span class="font-semibold text-gold">Promo Ramadan</span>
+        <span class="text-cream/70 mx-1">·</span>
+        Diskon <span class="text-gold font-bold">20%</span>
+        <a href="#booking" class="ml-2 text-xs bg-gold text-noir font-semibold px-2 py-0.5 rounded-sm">Book</a>
+      </p>
+    </div>
+    <button onclick="closeAnnouncementBar()" class="text-cream/50 hover:text-cream transition-colors flex-shrink-0 text-base leading-none p-1">&times;</button>
+  </div>
+</div>
+
+<!-- ═══ NAVBAR ═══ -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-4" style="background: rgba(10,10,10,0.6); backdrop-filter: blur(10px);">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <!-- Logo -->
+    <a href="#beranda" class="flex items-center gap-3 group">
+      <div class="w-10 h-10 rounded-full bg-crimson flex items-center justify-center overflow-hidden border-2 border-crimson/30 group-hover:border-crimson transition-all">
+        <img src="images/logo.jpg" alt="logo">
+      </div>
+      <div>
+        <div class="font-display font-black text-cream text-sm tracking-wider leading-tight">THE MAFIA</div>
+        <div class="text-[0.55rem] tracking-[0.25em] text-crimson uppercase font-body font-600">Barbershop</div>
+      </div>
+    </a>
+
+    <!-- Desktop Menu -->
+    <div class="hidden md:flex items-center gap-7">
+      <a href="#beranda" class="nav-link">Beranda</a>
+      <a href="#tentang" class="nav-link">Tentang</a>
+      <a href="#layanan" class="nav-link">Layanan</a>
+      <a href="#barber" class="nav-link">Barber</a>
+      <a href="#galeri" class="nav-link">Galeri</a>
+      <a href="#booking" class="nav-link">Booking</a>
+      <a href="#kontak" class="nav-link">Kontak</a>
+      <a href="#booking" class="btn-primary text-xs">Book Now</a>
+    </div>
+
+    <!-- Hamburger -->
+    <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-2" onclick="toggleMenu()">
+      <span class="w-6 h-0.5 bg-cream transition-all" id="ham1"></span>
+      <span class="w-6 h-0.5 bg-cream transition-all" id="ham2"></span>
+      <span class="w-4 h-0.5 bg-crimson transition-all" id="ham3"></span>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="md:hidden border-t border-white/5 mt-4">
+    <div class="flex flex-col gap-1 py-4 px-2">
+      <a href="#beranda" class="nav-link py-3 px-4 border-b border-white/5" onclick="closeMenu()">Beranda</a>
+      <a href="#tentang" class="nav-link py-3 px-4 border-b border-white/5" onclick="closeMenu()">Tentang Kami</a>
+      <a href="#layanan" class="nav-link py-3 px-4 border-b border-white/5" onclick="closeMenu()">Layanan</a>
+      <a href="#barber" class="nav-link py-3 px-4 border-b border-white/5" onclick="closeMenu()">Barber</a>
+      <a href="#galeri" class="nav-link py-3 px-4 border-b border-white/5" onclick="closeMenu()">Galeri</a>
+      <a href="#booking" class="nav-link py-3 px-4 border-b border-white/5" onclick="closeMenu()">Booking</a>
+      <a href="#kontak" class="nav-link py-3 px-4" onclick="closeMenu()">Kontak</a>
+      <div class="pt-4 px-4">
+        <a href="#booking" class="btn-primary block text-center" onclick="closeMenu()">Booking Sekarang</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="beranda" class="hero-bg min-h-screen flex items-center relative">
+  <!-- Decorative lines -->
+  <div class="absolute top-0 left-0 w-px h-full bg-gradient-to-b from-transparent via-crimson/20 to-transparent"></div>
+  <div class="absolute top-0 right-24 w-px h-full bg-gradient-to-b from-transparent via-white/5 to-transparent hidden md:block"></div>
+
+  <!-- Content -->
+  <div class="max-w-7xl mx-auto px-6 md:px-12 w-full pt-36 md:pt-28 pb-16 md:pb-20 grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+    <div>
+      <div class="live-badge mb-8">
+        <span class="live-dot"></span>
+        Buka Sekarang · 09.00 – 00.00
+      </div>
+      <h1 class="hero-title text-6xl md:text-8xl mb-6">
+        THE<br/>MAFIA<br/><span style="font-style:italic">Barbershop</span>
+      </h1>
+      <p class="text-cream/60 font-body text-lg mb-2 tracking-wide">Solution for your hair</p>
+      <div class="red-line my-6"></div>
+      <p class="text-cream/50 font-body text-sm leading-relaxed mb-10 max-w-sm">
+        Barbershop premium dengan konsep maskulin & elegan. Hadir di 2 lokasi strategis untuk melayani Anda dengan standar kelas dunia.
+      </p>
+
+      <!-- Stats row -->
+      <div class="flex gap-8 mb-10">
+        <div>
+          <div class="font-display font-black text-3xl text-cream">4.8<span class="text-crimson text-xl">★</span></div>
+          <div class="text-cream/40 text-xs tracking-widest uppercase">Rating</div>
+        </div>
+        <div class="w-px bg-white/10"></div>
+        <div>
+          <div class="font-display font-black text-3xl text-cream">2</div>
+          <div class="text-cream/40 text-xs tracking-widest uppercase">Outlet</div>
+        </div>
+        <div class="w-px bg-white/10"></div>
+        <div>
+          <div class="font-display font-black text-3xl text-cream">5+</div>
+          <div class="text-cream/40 text-xs tracking-widest uppercase">Barber Pro</div>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+        <a href="#booking" class="btn-primary text-center">Booking Sekarang</a>
+        <a href="#layanan" class="btn-outline text-center">Lihat Layanan</a>
+      </div>
+    </div>
+
+    <!-- Right visual card -->
+    <div class="hidden md:flex justify-center items-center">
+      <div class="relative">
+        <!-- Main card -->
+        <div class="w-80 bg-charcoal border border-white/8 rounded-sm p-8 shadow-2xl float-badge">
+          <div class="text-center mb-6">
+            <!-- SVG Barber Icon -->
+            <svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" class="mx-auto mb-4">
+            
+            <!-- Circle background -->
+            <circle cx="40" cy="40" r="38" fill="rgba(225,29,72,0.1)" stroke="rgba(225,29,72,0.3)" stroke-width="1"/>
+
+            <!-- Clip lebih kecil (biar ada padding) -->
+            <defs>
+                <clipPath id="circleClip">
+                <circle cx="40" cy="40" r="32"/>
+                </clipPath>
+            </defs>
+
+            <!-- Logo (diperkecil & center) -->
+            <image 
+                href="images/logo.jpg" 
+                x="8" 
+                y="8" 
+                width="64" 
+                height="64" 
+                clip-path="url(#circleClip)" 
+                preserveAspectRatio="xMidYMid slice"
+            />
+
+            </svg>
+            <div class="font-display font-black text-cream text-xl mb-1">THE MAFIA</div>
+            <div class="text-crimson text-xs tracking-widest uppercase">Barbershop</div>
+          </div>
+          <hr class="fancy mb-6" />
+          <div class="space-y-3">
+            <div class="flex justify-between items-center">
+              <span class="text-cream/60 text-xs tracking-wide">Haircut Reguler</span>
+              <span class="price-badge">Rp 50.000</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-cream/60 text-xs tracking-wide">Haircut Premium</span>
+              <span class="price-badge">Rp 75.000</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-cream/60 text-xs tracking-wide">Haircut Exclusive</span>
+              <span class="price-badge">Rp 125.000</span>
+            </div>
+          </div>
+          <div class="mt-6 pt-6 border-t border-white/6 text-center">
+            <div class="text-cream/40 text-xs">⏰ Jam Buka: 09.00 – 00.00 WIB</div>
+          </div>
+        </div>
+        <!-- Decorative accent -->
+        <div class="absolute -top-4 -right-4 w-24 h-24 border border-crimson/20 rounded-sm"></div>
+        <div class="absolute -bottom-4 -left-4 w-16 h-16 border border-gold/20 rounded-sm"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom scroll indicator -->
+  <div class="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2">
+    <div class="text-cream/30 text-xs tracking-widest uppercase">Scroll</div>
+    <div class="w-px h-12 bg-gradient-to-b from-cream/30 to-transparent"></div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT / TENTANG ═══ -->
+<section id="tentang" class="py-28 px-6 md:px-12 relative overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-br from-charcoal/30 to-transparent pointer-events-none"></div>
+  <div class="max-w-7xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+      <div class="reveal">
+        <div class="section-label mb-4">Tentang Kami</div>
+        <h2 class="section-title text-4xl md:text-5xl text-cream mb-6">
+          Bukan Sekadar<br/><em class="text-crimson">Tempat Potong</em>
+        </h2>
+        <div class="red-line mb-6"></div>
+        <p class="text-cream/60 font-body leading-relaxed mb-5">
+          The Mafia Barbershop hadir dengan visi menghadirkan pengalaman grooming premium yang sesungguhnya — bukan hanya potongan rambut, melainkan sebuah ritual transformasi.
+        </p>
+        <p class="text-cream/60 font-body leading-relaxed mb-8">
+          Dengan tim barber berpengalaman dan standar layanan terbaik, kami percaya setiap pria berhak tampil dengan kepercayaan diri yang luar biasa.
+        </p>
+        <div class="grid grid-cols-2 gap-6">
+          <div class="bg-charcoal border border-white/6 p-5 rounded-sm">
+            <div class="text-crimson text-2xl font-display font-black mb-1">2</div>
+            <div class="text-cream/50 text-xs tracking-widest uppercase">Outlet</div>
+          </div>
+          <div class="bg-charcoal border border-white/6 p-5 rounded-sm">
+            <div class="text-crimson text-2xl font-display font-black mb-1">500+</div>
+            <div class="text-cream/50 text-xs tracking-widest uppercase">Pelanggan Puas</div>
+          </div>
+          <div class="bg-charcoal border border-white/6 p-5 rounded-sm">
+            <div class="text-crimson text-2xl font-display font-black mb-1">15+</div>
+            <div class="text-cream/50 text-xs tracking-widest uppercase">Jenis Layanan</div>
+          </div>
+          <div class="bg-charcoal border border-white/6 p-5 rounded-sm">
+            <div class="text-crimson text-2xl font-display font-black mb-1">5★</div>
+            <div class="text-cream/50 text-xs tracking-widest uppercase">Standar Kualitas</div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal" style="transition-delay:0.2s">
+        <!-- Visual decorative block -->
+        <div class="relative">
+          <div class="bg-charcoal border border-white/8 rounded-sm p-10 text-center">
+            <div class="text-8xl mb-4">💈</div>
+            <div class="font-display text-cream text-2xl font-black mb-2">Mafia Style</div>
+            <div class="text-crimson text-sm tracking-widest uppercase mb-6">Premium Grooming Experience</div>
+            <div class="space-y-3 text-left">
+              <div class="flex items-center gap-3">
+                <div class="w-5 h-5 rounded-full bg-crimson/20 border border-crimson/40 flex items-center justify-center flex-shrink-0">
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#e11d48" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </div>
+                <span class="text-cream/70 text-sm">Barber Profesional & Berpengalaman</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-5 h-5 rounded-full bg-crimson/20 border border-crimson/40 flex items-center justify-center flex-shrink-0">
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#e11d48" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </div>
+                <span class="text-cream/70 text-sm">Produk Premium & Berkualitas</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-5 h-5 rounded-full bg-crimson/20 border border-crimson/40 flex items-center justify-center flex-shrink-0">
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#e11d48" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </div>
+                <span class="text-cream/70 text-sm">Suasana Nyaman & Maskulin</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-5 h-5 rounded-full bg-crimson/20 border border-crimson/40 flex items-center justify-center flex-shrink-0">
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#e11d48" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </div>
+                <span class="text-cream/70 text-sm">Booking Online Tanpa Antri</span>
+              </div>
+            </div>
+          </div>
+          <div class="absolute -top-3 -left-3 w-full h-full border border-crimson/10 rounded-sm pointer-events-none"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ OUTLETS ═══ -->
+<section class="py-28 px-6 md:px-12 bg-gradient-to-b from-noir to-charcoal/20">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16 reveal">
+      <div class="section-label mb-4">Lokasi Kami</div>
+      <h2 class="section-title text-4xl md:text-5xl text-cream mb-4">2 Outlet Strategis</h2>
+      <div class="center-line mb-4"></div>
+      <p class="text-cream/50 text-sm max-w-md mx-auto">Temukan kami di dua lokasi premium yang mudah dijangkau di Surabaya</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8">
+      <!-- Outlet 1 -->
+      <div class="outlet-card rounded-sm overflow-hidden reveal">
+        <div class="h-52 relative overflow-hidden">
+        <!-- Background Image -->
+        <img src="images/outlet_lidah2.jpg" 
+            class="absolute inset-0 w-full h-full object-cover" 
+            alt="Outlet Lidah Kulon">
+
+        <!-- Overlay gelap biar teks kebaca -->
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+
+        <!-- Label -->
+        <div class="absolute top-4 left-4">
+            <span class="bg-crimson text-white text-xs font-bold tracking-wider px-3 py-1 uppercase">
+            #1 Lidah Kulon
+            </span>
+        </div>
+        </div>
+        <div class="p-8 relative">
+          <div class="big-number">01</div>
+          <div class="section-label mb-2">Outlet Pertama</div>
+          <h3 class="font-display text-2xl font-black text-cream mb-4">Lidah Kulon</h3>
+          <div class="flex items-start gap-3 mb-3">
+            <svg class="w-4 h-4 text-crimson mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/></svg>
+            <span class="text-cream/60 text-sm">Jl. Raya Lidah Kulon No. 2A, Surabaya</span>
+          </div>
+          <div class="flex items-center gap-3 mb-6">
+            <svg class="w-4 h-4 text-crimson flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>
+            <span class="text-cream/60 text-sm">Buka setiap hari 09.00 – 00.00 WIB</span>
+          </div>
+          <div class="flex gap-3">
+            <a href="https://maps.app.goo.gl/N7fgaiMdnbdfNPtp9" target="_blank" class="btn-primary text-xs flex-1 text-center">📍 Google Maps</a>
+            <a href="https://wa.me/6282225328882" target="_blank" class="btn-outline text-xs flex-1 text-center">💬 WhatsApp</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Outlet 2 -->
+      <div class="outlet-card rounded-sm overflow-hidden reveal" style="transition-delay:0.15s">
+        <div class="h-52 relative overflow-hidden">
+        <img src="images/outlet_mer.jpg" 
+            class="absolute inset-0 w-full h-full object-cover" 
+            alt="Outlet MERR">
+
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+
+        <div class="absolute top-4 left-4">
+            <span class="bg-crimson text-white text-xs font-bold tracking-wider px-3 py-1 uppercase">
+            #2 MERR
+            </span>
+        </div>
+        </div>
+        <div class="p-8 relative">
+          <div class="big-number">02</div>
+          <div class="section-label mb-2">Outlet Kedua</div>
+          <h3 class="font-display text-2xl font-black text-cream mb-4">Ruko Citi 9, MERR</h3>
+          <div class="flex items-start gap-3 mb-3">
+            <svg class="w-4 h-4 text-crimson mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/></svg>
+            <span class="text-cream/60 text-sm">Ruko Citi 9, Jl. Dr. Ir. H. Soekarno, Gunung Anyar, Surabaya</span>
+          </div>
+          <div class="flex items-center gap-3 mb-6">
+            <svg class="w-4 h-4 text-crimson flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>
+            <span class="text-cream/60 text-sm">Buka setiap hari 09.00 – 00.00 WIB</span>
+          </div>
+          <div class="flex gap-3">
+            <a href="https://maps.app.goo.gl/P2QkuyCajXd1iVb28" target="_blank" class="btn-primary text-xs flex-1 text-center">📍 Google Maps</a>
+            <a href="https://wa.me/6285385858626" target="_blank" class="btn-outline text-xs flex-1 text-center">💬 WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ LAYANAN ═══ -->
+<section id="layanan" class="py-28 px-6 md:px-12">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16 reveal">
+      <div class="section-label mb-4">Apa Yang Kami Tawarkan</div>
+      <h2 class="section-title text-4xl md:text-5xl text-cream mb-4">Layanan Premium</h2>
+      <div class="center-line mb-4"></div>
+      <p class="text-cream/50 text-sm max-w-md mx-auto">Setiap layanan dirancang untuk memberikan pengalaman terbaik</p>
+    </div>
+
+    <!-- Price List Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
+        <div class="service-card rounded-sm p-7 reveal">
+            <div class="text-3xl mb-4">✂️</div>
+            <h3 class="font-display font-bold text-cream text-lg mb-2">Haircut Reguler</h3>
+            <p class="text-cream/50 text-xs mb-4 leading-relaxed">Potongan rambut standar yang dikerjakan secara presisi termasuk konsultasi gaya rambut dan cuci rambut.</p>
+            <span class="price-badge">Rp 50.000</span>
+        </div>
+        <div class="service-card rounded-sm p-7 reveal">
+            <div class="text-3xl mb-4">👑</div>
+            <h3 class="font-display font-bold text-cream text-lg mb-2">Haircut Premium</h3>
+            <p class="text-cream/50 text-xs mb-4 leading-relaxed">Layanan potong rambut lengkap dengan pijat kepala rileks, handuk panas aroma terapi, dan tonic rambut.</p>
+            <span class="price-badge">Rp 75.000</span>
+        </div>
+        <div class="service-card rounded-sm p-7 reveal">
+            <div class="text-3xl mb-4">💎</div>
+            <h3 class="font-display font-bold text-cream text-lg mb-2">Haircut Exclusive</h3>
+            <p class="text-cream/50 text-xs mb-4 leading-relaxed">Pengalaman terbaik: Premium Haircut ditambah masker mata, krim wajah eksklusif, dan penataan gaya pomade.</p>
+            <span class="price-badge">Rp 125.000</span>
+        </div>
+        <div class="service-card rounded-sm p-7 reveal">
+            <div class="text-3xl mb-4">👩</div>
+            <h3 class="font-display font-bold text-cream text-lg mb-2">Haircut Wanita</h3>
+            <p class="text-cream/50 text-xs mb-4 leading-relaxed">Potongan rambut khusus wanita dengan teknik layer atau bob yang disesuaikan dengan bentuk wajah Anda.</p>
+            <span class="price-badge">Rp 75.000</span>
+        </div>
+        <div class="service-card rounded-sm p-7 reveal">
+            <div class="text-3xl mb-4">💁‍♀️</div>
+            <h3 class="font-display font-bold text-cream text-lg mb-2">Haircut Premium Wanita</h3>
+            <p class="text-cream/50 text-xs mb-4 leading-relaxed">Haircut wanita lengkap dengan vitamin rambut, pijat pundak, dan blow dry styling profesional.</p>
+            <span class="price-badge">Rp 100.000</span>
+        </div>
+        <div class="service-card rounded-sm p-7 reveal">
+            <div class="text-3xl mb-4">🌬️</div>
+            <h3 class="font-display font-bold text-cream text-lg mb-2">Cuci Styling / Catok</h3>
+            <p class="text-cream/50 text-xs mb-4 leading-relaxed">Pembersihan rambut menyeluruh diikuti dengan penataan gaya menggunakan hairdryer atau catokan berkualitas.</p>
+            <span class="price-badge">Rp 55.000</span>
+        </div>
+        <div class="service-card rounded-sm p-7 reveal hidden-service">
+            <div class="text-3xl mb-4">💆</div>
+            <h3 class="font-display font-bold text-cream text-lg mb-2">Creambath</h3>
+            <p class="text-cream/50 text-xs mb-4 leading-relaxed">Perawatan nutrisi akar rambut dengan masker krim pilihan dan pijat kepala yang melancarkan peredaran darah.</p>
+            <span class="price-badge">Rp 65.000</span>
+        </div>
+        <div class="service-card rounded-sm p-7 reveal hidden-service">
+            <div class="text-3xl mb-4">🕯️</div>
+            <h3 class="font-display font-bold text-cream text-lg mb-2">Ear Candle</h3>
+            <p class="text-cream/50 text-xs mb-4 leading-relaxed">Terapi pembersihan telinga tradisional yang memberikan efek relaksasi mendalam dan membersihkan kotoran.</p>
+            <span class="price-badge">Rp 35.000</span>
+        </div>
+        <div class="service-card rounded-sm p-7 reveal hidden-service">
+            <div class="text-3xl mb-4">✨</div>
+            <h3 class="font-display font-bold text-cream text-lg mb-2">Face Massage</h3>
+            <p class="text-cream/50 text-xs mb-4 leading-relaxed">Pijat wajah untuk merilekskan otot-otot muka yang kaku, lengkap dengan pemberian face cream pelembab.</p>
+            <span class="price-badge">Rp 50.000</span>
+        </div>
+        <div class="service-card rounded-sm p-7 reveal hidden-service">
+            <div class="text-3xl mb-4">🌀</div>
+            <h3 class="font-display font-bold text-cream text-lg mb-2">Perm / Keriting</h3>
+            <p class="text-cream/50 text-xs mb-4 leading-relaxed">Memberikan tekstur ikal atau keriting permanen yang modis dan mudah diatur untuk gaya rambut bervolume.</p>
+            <span class="price-badge">Rp 150.000 – 200.000</span>
+        </div>
+        <div class="service-card rounded-sm p-7 reveal hidden-service">
+            <div class="text-3xl mb-4">🎨</div>
+            <h3 class="font-display font-bold text-cream text-lg mb-2">Toning Black</h3>
+            <p class="text-cream/50 text-xs mb-4 leading-relaxed">Menutup uban atau menghitamkan kembali warna rambut yang kusam agar terlihat lebih sehat dan muda.</p>
+            <span class="price-badge">Rp 60.000 – 150.000</span>
+        </div>
+        <div class="service-card rounded-sm p-7 reveal hidden-service">
+            <div class="text-3xl mb-4">🌈</div>
+            <h3 class="font-display font-bold text-cream text-lg mb-2">Coloring</h3>
+            <p class="text-cream/50 text-xs mb-4 leading-relaxed">Pewarnaan rambut profesional sesuai keinginan Anda menggunakan produk yang aman bagi kulit kepala.</p>
+            <span class="price-badge">Rp 100.000 – 400.000</span>
+        </div>
+    </div>
+
+    <div class="text-center mt-10 mb-16 reveal">
+    <button id="toggleBtn" class="toggle-btn">
+        <span id="toggleText">Lihat Lebih Banyak</span>
+        <span id="toggleIcon" class="arrow">↓</span>
+    </button>
+    </div>
+
+    <!-- Full Price List CTA -->
+    <div class="text-center reveal">
+      <div class="inline-block border border-crimson/30 rounded-sm px-8 py-4 bg-crimson/5">
+        <div class="text-cream/60 text-sm mb-1">Lihat daftar harga lengkap</div>
+        <a href="#booking" class="btn-primary inline-block mt-2">Booking Layanan</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROMO BANNER SLIDER ═══ -->
+<section class="overflow-hidden relative" style="background: #0f0508;">
+  <!-- Slides wrapper -->
+  <div id="promo-slider" class="flex transition-transform duration-700 ease-in-out">
+
+    <!-- SLIDE 1: Ramadan Diskon -->
+    <div class="promo-slide min-w-full py-16 px-6 md:px-12 relative overflow-hidden" style="background: linear-gradient(135deg, #0f0508 0%, #1e0a10 60%, #0f0508 100%);">
+      <div class="absolute right-0 top-0 w-80 h-80 rounded-full opacity-10" style="border: 1px solid #c9a84c; transform: translate(35%, -35%);"></div>
+      <div class="absolute right-0 top-0 w-52 h-52 rounded-full opacity-10" style="border: 1px solid #c9a84c; transform: translate(25%, -25%);"></div>
+      <div class="absolute left-0 bottom-0 w-56 h-56 rounded-full opacity-10" style="border: 1px solid #e11d48; transform: translate(-30%, 30%);"></div>
+      <div class="max-w-7xl mx-auto relative flex flex-col md:flex-row items-center justify-between gap-10">
+        <div class="text-center md:text-left reveal">
+          <div class="text-xs tracking-[0.3em] uppercase mb-3 font-body" style="color:#c9a84c;">☽ &nbsp;Ramadan Special 1446 H</div>
+          <h2 class="font-display font-black text-4xl md:text-5xl text-cream leading-tight mb-4">Tampil <span style="color:#e11d48;">Istimewa</span><br/>di Bulan Penuh Berkah</h2>
+          <p class="text-cream/50 font-body text-sm leading-relaxed mb-6 max-w-md">Rayakan Ramadan dengan penampilan terbaik. Dapatkan diskon spesial untuk semua layanan premium kami.</p>
+          <div class="flex flex-wrap gap-2 justify-center md:justify-start mb-8">
+            <span class="text-xs px-3 py-1.5 rounded-sm font-body" style="background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.3);color:#c9a84c;">✂ Cukur + Beard Trim</span>
+            <span class="text-xs px-3 py-1.5 rounded-sm font-body" style="background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.3);color:#c9a84c;">✂ Pompadour Package</span>
+            <span class="text-xs px-3 py-1.5 rounded-sm font-body" style="background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.3);color:#c9a84c;">✂ Classic Taper</span>
+          </div>
+          <a href="#booking" class="btn-primary inline-block">Booking Promo Sekarang</a>
+        </div>
+        <div class="reveal flex-shrink-0">
+          <div class="relative flex items-center justify-center" style="width:200px;height:200px;">
+            <div class="absolute inset-0 rounded-full" style="border:1.5px solid rgba(201,168,76,0.25);"></div>
+            <div class="absolute rounded-full" style="inset:16px;border:1px solid rgba(201,168,76,0.15);"></div>
+            <div class="text-center">
+              <div class="text-xs font-body tracking-widest uppercase mb-1" style="color:rgba(201,168,76,0.6);">Hemat hingga</div>
+              <div class="font-display font-black leading-none mb-1" style="font-size:72px;color:#c9a84c;">20<span style="font-size:36px;color:#e11d48;">%</span></div>
+              <div class="text-xs font-body tracking-widest uppercase" style="color:rgba(245,245,220,0.35);">semua layanan</div>
+            </div>
+          </div>
+          <p class="text-center text-xs font-body mt-4" style="color:rgba(245,245,220,0.3);letter-spacing:0.15em;">1 — 30 RAMADAN 1446 H</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: Paket Lebaran -->
+    <div class="promo-slide min-w-full py-16 px-6 md:px-12 relative overflow-hidden" style="background: linear-gradient(135deg, #06080f 0%, #0d1525 60%, #06080f 100%);">
+      <div class="absolute right-0 top-0 w-80 h-80 rounded-full opacity-10" style="border:1px solid #378add;transform:translate(35%,-35%);"></div>
+      <div class="absolute left-0 bottom-0 w-56 h-56 rounded-full opacity-10" style="border:1px solid #378add;transform:translate(-30%,30%);"></div>
+      <div class="max-w-7xl mx-auto relative flex flex-col md:flex-row items-center justify-between gap-10">
+        <div class="text-center md:text-left reveal">
+          <div class="text-xs tracking-[0.3em] uppercase mb-3 font-body" style="color:#378add;">★ &nbsp;Paket Spesial Lebaran</div>
+          <h2 class="font-display font-black text-4xl md:text-5xl text-cream leading-tight mb-4">Siap Mudik?<br/><span style="color:#378add;">Rapi & Bersih</span></h2>
+          <p class="text-cream/50 font-body text-sm leading-relaxed mb-6 max-w-md">Paket lengkap cukur + creambath + beard shaping khusus menyambut Idul Fitri. Tampil memukau saat silaturahmi.</p>
+          <div class="flex flex-wrap gap-2 justify-center md:justify-start mb-8">
+            <span class="text-xs px-3 py-1.5 rounded-sm font-body" style="background:rgba(55,138,221,0.12);border:1px solid rgba(55,138,221,0.3);color:#378add;">✂ Haircut + Creambath</span>
+            <span class="text-xs px-3 py-1.5 rounded-sm font-body" style="background:rgba(55,138,221,0.12);border:1px solid rgba(55,138,221,0.3);color:#378add;">✂ Beard Shaping</span>
+            <span class="text-xs px-3 py-1.5 rounded-sm font-body" style="background:rgba(55,138,221,0.12);border:1px solid rgba(55,138,221,0.3);color:#378add;">✂ Hair Wax Styling</span>
+          </div>
+          <a href="#booking" class="btn-primary inline-block">Booking Paket Lebaran</a>
+        </div>
+        <div class="reveal flex-shrink-0">
+          <div class="relative flex items-center justify-center" style="width:200px;height:200px;">
+            <div class="absolute inset-0 rounded-full" style="border:1.5px solid rgba(55,138,221,0.25);"></div>
+            <div class="absolute rounded-full" style="inset:16px;border:1px solid rgba(55,138,221,0.15);"></div>
+            <div class="text-center px-4">
+              <div class="text-xs font-body tracking-widest uppercase mb-2" style="color:rgba(55,138,221,0.6);">Mulai dari</div>
+              <div class="font-display font-black leading-none mb-1" style="font-size:38px;color:#378add;">45rb</div>
+              <div class="text-xs font-body" style="color:rgba(245,245,220,0.35);">paket komplit</div>
+            </div>
+          </div>
+          <p class="text-center text-xs font-body mt-4" style="color:rgba(245,245,220,0.3);letter-spacing:0.15em;">BERLAKU S/D IDUL FITRI</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: Member Card -->
+    <div class="promo-slide min-w-full py-16 px-6 md:px-12 relative overflow-hidden" style="background: linear-gradient(135deg, #090f06 0%, #121f09 60%, #090f06 100%);">
+      <div class="absolute right-0 top-0 w-80 h-80 rounded-full opacity-10" style="border:1px solid #639922;transform:translate(35%,-35%);"></div>
+      <div class="absolute left-0 bottom-0 w-56 h-56 rounded-full opacity-10" style="border:1px solid #639922;transform:translate(-30%,30%);"></div>
+      <div class="max-w-7xl mx-auto relative flex flex-col md:flex-row items-center justify-between gap-10">
+        <div class="text-center md:text-left reveal">
+          <div class="text-xs tracking-[0.3em] uppercase mb-3 font-body" style="color:#639922;">◈ &nbsp;Member Privilege</div>
+          <h2 class="font-display font-black text-4xl md:text-5xl text-cream leading-tight mb-4">Jadi Member<br/><span style="color:#639922;">Lebih Hemat</span></h2>
+          <p class="text-cream/50 font-body text-sm leading-relaxed mb-6 max-w-md">Daftar member The Mafia Barbershop dan nikmati keuntungan eksklusif setiap kunjungan. Makin sering, makin hemat.</p>
+          <div class="flex flex-wrap gap-2 justify-center md:justify-start mb-8">
+            <span class="text-xs px-3 py-1.5 rounded-sm font-body" style="background:rgba(99,153,34,0.12);border:1px solid rgba(99,153,34,0.3);color:#639922;">✦ Diskon 15% tiap kunjungan</span>
+            <span class="text-xs px-3 py-1.5 rounded-sm font-body" style="background:rgba(99,153,34,0.12);border:1px solid rgba(99,153,34,0.3);color:#639922;">✦ Priority Booking</span>
+            <span class="text-xs px-3 py-1.5 rounded-sm font-body" style="background:rgba(99,153,34,0.12);border:1px solid rgba(99,153,34,0.3);color:#639922;">✦ Free 1x Cukur / bulan</span>
+          </div>
+          <a href="#booking" class="btn-primary inline-block">Daftar Member Sekarang</a>
+        </div>
+        <div class="reveal flex-shrink-0">
+          <div class="relative flex items-center justify-center" style="width:200px;height:200px;">
+            <div class="absolute inset-0 rounded-full" style="border:1.5px solid rgba(99,153,34,0.25);"></div>
+            <div class="absolute rounded-full" style="inset:16px;border:1px solid rgba(99,153,34,0.15);"></div>
+            <div class="text-center px-4">
+              <div class="text-xs font-body tracking-widest uppercase mb-2" style="color:rgba(99,153,34,0.6);">Gratis daftar</div>
+              <div class="font-display font-black leading-none mb-1" style="font-size:42px;color:#639922;">FREE</div>
+              <div class="text-xs font-body" style="color:rgba(245,245,220,0.35);">member card</div>
+            </div>
+          </div>
+          <p class="text-center text-xs font-body mt-4" style="color:rgba(245,245,220,0.3);letter-spacing:0.15em;">TERBATAS — DAFTAR SEKARANG</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Slider Controls -->
+  <button onclick="promoSlide(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center transition-all hover:bg-white/10" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:rgba(245,245,220,0.6);">&#8592;</button>
+  <button onclick="promoSlide(1)" class="absolute right-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center transition-all hover:bg-white/10" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:rgba(245,245,220,0.6);">&#8594;</button>
+
+  <!-- Dots -->
+  <div class="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2">
+    <button onclick="promoGoTo(0)" class="promo-dot w-6 h-1 rounded-full transition-all" style="background:#e11d48;"></button>
+    <button onclick="promoGoTo(1)" class="promo-dot w-2 h-1 rounded-full transition-all" style="background:rgba(245,245,220,0.25);"></button>
+    <button onclick="promoGoTo(2)" class="promo-dot w-2 h-1 rounded-full transition-all" style="background:rgba(245,245,220,0.25);"></button>
+  </div>
+</section>
+
+<!-- ═══ BARBER TEAM ═══ -->
+<section id="barber" class="py-28 px-6 md:px-12 bg-gradient-to-b from-charcoal/20 to-noir">
+  <div class="max-w-7xl mx-auto text-center">
+    <div class="mb-16 reveal">
+      <div class="section-label mb-4">Tim Kami</div>
+      <h2 class="section-title text-4xl md:text-5xl text-cream mb-4">The Barber Squad</h2>
+      <div class="center-line mb-4"></div>
+      <p class="text-cream/50 text-sm max-w-md mx-auto">Barber profesional berpengalaman dari Lidah Kulon & MERR</p>
+    </div>
+
+    <div id="barber-grid" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
+      </div>
+
+    <div class="mt-12 reveal">
+        <button id="toggleBarberBtn" class="toggle-btn">
+            <span id="barberBtnText">Lihat Semua Barber</span>
+            <span id="barberBtnIcon" class="arrow">↓</span>
+        </button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ REVIEW ═══ -->
+<section class="py-28 px-6 md:px-12">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16 reveal">
+      <div class="section-label mb-4">Kata Mereka</div>
+      <h2 class="section-title text-4xl md:text-5xl text-cream mb-4">Review Pelanggan</h2>
+      <div class="center-line mb-6"></div>
+      
+      <div class="inline-flex items-center gap-4 bg-charcoal border border-white/8 rounded-sm px-8 py-4">
+        <div class="font-display text-5xl font-black text-cream">4.8</div>
+        <div>
+          <div class="flex gap-1 mb-1">
+            <span class="star text-xl">★</span><span class="star text-xl">★</span><span class="star text-xl">★</span><span class="star text-xl">★</span><span class="star text-xl">★</span>
+          </div>
+          <div class="text-cream/40 text-xs tracking-widest uppercase">Rating Keseluruhan</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="review-card rounded-sm p-7 reveal">
+        <div class="flex gap-1 mb-4"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+        <p class="text-cream/70 text-sm leading-relaxed mb-6 italic">"Pelayanan bagus banget dan hasil potong sangat rapi. Barbernya ramah dan profesional. Pasti balik lagi!"</p>
+        <div class="flex items-center gap-3">
+          <img src="https://i.pravatar.cc/150?u=ahmad" alt="Ahmad Fauzi" class="w-10 h-10 rounded-full border border-crimson/30 object-cover">
+          <div>
+            <div class="text-cream text-sm font-semibold">Ahmad Fauzi</div>
+            <div class="text-cream/30 text-xs">Outlet Lidah Kulon</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card rounded-sm p-7 reveal" style="transition-delay:0.1s">
+        <div class="flex gap-1 mb-4"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+        <p class="text-cream/70 text-sm leading-relaxed mb-6 italic">"Tempatnya nyaman banget, suasananya maskulin dan elegan. Worth it banget untuk datang ke sini. Recommended!"</p>
+        <div class="flex items-center gap-3">
+          <img src="https://i.pravatar.cc/150?u=rizky" alt="Rizky Maulana" class="w-10 h-10 rounded-full border border-crimson/30 object-cover">
+          <div>
+            <div class="text-cream text-sm font-semibold">Rizky Maulana</div>
+            <div class="text-cream/30 text-xs">Outlet MERR</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card rounded-sm p-7 reveal" style="transition-delay:0.2s">
+        <div class="flex gap-1 mb-4"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star" style="color:rgba(201,168,76,0.4)">★</span></div>
+        <p class="text-cream/70 text-sm leading-relaxed mb-6 italic">"Haircut exclusive-nya luar biasa. Massagenya bikin rileks, hot towelnya enak. Harga sesuai kualitas!"</p>
+        <div class="flex items-center gap-3">
+          <img src="https://i.pravatar.cc/150?u=dimas" alt="Dimas Pratama" class="w-10 h-10 rounded-full border border-crimson/30 object-cover">
+          <div>
+            <div class="text-cream text-sm font-semibold">Dimas Pratama</div>
+            <div class="text-cream/30 text-xs">Outlet Lidah Kulon</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card rounded-sm p-7 reveal">
+        <div class="flex gap-1 mb-4"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+        <p class="text-cream/70 text-sm leading-relaxed mb-6 italic">"Booking online-nya gampang, datang langsung dilayani. Ngga perlu antri lama. Barbernya skillful banget!"</p>
+        <div class="flex items-center gap-3">
+          <img src="https://i.pravatar.cc/150?u=farhan" alt="Farhaan Ridho" class="w-10 h-10 rounded-full border border-crimson/30 object-cover">
+          <div>
+            <div class="text-cream text-sm font-semibold">Farhaan Ridho</div>
+            <div class="text-cream/30 text-xs">Outlet MERR</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card rounded-sm p-7 reveal" style="transition-delay:0.1s">
+        <div class="flex gap-1 mb-4"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star" style="color:rgba(201,168,76,0.4)">★</span></div>
+        <p class="text-cream/70 text-sm leading-relaxed mb-6 italic">"Sudah 3 bulan langganan di sini. Konsisten bagus, barber-barbernya ramah dan hasil selalu memuaskan!"</p>
+        <div class="flex items-center gap-3">
+          <img src="https://i.pravatar.cc/150?u=bagas" alt="Bagas Wahyu" class="w-10 h-10 rounded-full border border-crimson/30 object-cover">
+          <div>
+            <div class="text-cream text-sm font-semibold">Bagas Wahyu</div>
+            <div class="text-cream/30 text-xs">Outlet Lidah Kulon</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card rounded-sm p-7 reveal" style="transition-delay:0.2s">
+        <div class="flex gap-1 mb-4"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+        <p class="text-cream/70 text-sm leading-relaxed mb-6 italic">"Creambath-nya mantap! Rambut jadi lebih sehat dan lembut. Staff-nya profesional dan tahu apa yang mereka lakukan."</p>
+        <div class="flex items-center gap-3">
+          <img src="https://i.pravatar.cc/150?u=hendra" alt="Hendra Saputra" class="w-10 h-10 rounded-full border border-crimson/30 object-cover">
+          <div>
+            <div class="text-cream text-sm font-semibold">Hendra Saputra</div>
+            <div class="text-cream/30 text-xs">Outlet MERR</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ GALERI ═══ -->
+<section id="galeri" class="py-28 px-6 md:px-12 bg-gradient-to-b from-noir via-charcoal/10 to-noir">
+  <div class="max-w-7xl mx-auto">
+
+    <div class="text-center mb-16 reveal">
+      <div class="section-label mb-4">Karya Kami</div>
+      <h2 class="section-title text-4xl md:text-5xl text-cream mb-4">Galeri</h2>
+      <div class="center-line"></div>
+    </div>
+
+    <!-- GRID -->
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 grid-flow-dense auto-rows-[180px]">
+
+      <div class="gallery-item rounded-sm row-span-1 reveal" onclick="openLightbox(0)">
+        <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-icon">&#128269;</div>
+          <div class="gallery-overlay-label">Haircut</div>
+          <div class="gallery-overlay-title">Fade Cut</div>
+        </div>
+      </div>
+
+      <div class="gallery-item rounded-sm row-span-1 reveal" onclick="openLightbox(1)">
+        <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-icon">&#128269;</div>
+          <div class="gallery-overlay-label">Haircut</div>
+          <div class="gallery-overlay-title">Classic Taper</div>
+        </div>
+      </div>
+
+      <div class="gallery-item rounded-sm row-span-1 reveal" onclick="openLightbox(2)">
+        <img src="images/pompadour.jpg" class="w-full h-full object-cover">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-icon">&#128269;</div>
+          <div class="gallery-overlay-label">Haircut</div>
+          <div class="gallery-overlay-title">Pompadour</div>
+        </div>
+      </div>
+
+      <div class="gallery-item rounded-sm row-span-1 reveal" onclick="openLightbox(3)">
+        <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-icon">&#128269;</div>
+          <div class="gallery-overlay-label">Haircut</div>
+          <div class="gallery-overlay-title">Undercut</div>
+        </div>
+      </div>
+
+      <div class="gallery-item rounded-sm col-span-1 row-span-1 md:col-span-2 md:row-span-3 reveal" onclick="openLightbox(4)">
+        <img src="images/outlet_lidah2.jpg" class="w-full h-full object-cover">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-icon">&#128269;</div>
+          <div class="gallery-overlay-label">Interior</div>
+          <div class="gallery-overlay-title">Premium Interior</div>
+        </div>
+      </div>
+
+      <div class="gallery-item rounded-sm row-span-1 reveal" onclick="openLightbox(5)">
+        <img src="images/coloring.jpg" class="w-full h-full object-cover">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-icon">&#128269;</div>
+          <div class="gallery-overlay-label">Coloring</div>
+          <div class="gallery-overlay-title">Hair Coloring</div>
+        </div>
+      </div>
+
+      <div class="gallery-item rounded-sm row-span-1 reveal" onclick="openLightbox(6)">
+        <img src="images/beardtrim.jpg" class="w-full h-full object-cover">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-icon">&#128269;</div>
+          <div class="gallery-overlay-label">Grooming</div>
+          <div class="gallery-overlay-title">Beard Sculpting</div>
+        </div>
+      </div>
+
+      <div class="gallery-item rounded-sm col-span-1 row-span-1 md:col-span-3 md:col-start-1 md:row-span-2 lg:col-span-2 reveal" onclick="openLightbox(7)">
+        <img src="images/outlet_mer.jpg" class="w-full h-full object-cover">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-icon">&#128269;</div>
+          <div class="gallery-overlay-label">Outlet</div>
+          <div class="gallery-overlay-title">Outlet MERR</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ LIGHTBOX ═══ -->
+<div id="gallery-lightbox" onclick="handleLightboxClick(event)">
+  <button class="lightbox-btn" style="left:16px;" onclick="event.stopPropagation(); lbSlide(-1);">&#8592;</button>
+  <button id="lightbox-close" onclick="event.stopPropagation(); closeLightbox();">&#10005;</button>
+  <img id="lightbox-img" src="" alt="" draggable="false">
+  <div id="lightbox-title"></div>
+  <div id="lightbox-dots"></div>
+  <button class="lightbox-btn" style="right:16px;" onclick="event.stopPropagation(); lbSlide(1);">&#8594;</button>
+</div>
+
+<!-- ═══ BOOKING ═══ -->
+<section id="booking" class="py-28 px-6 md:px-12">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-16 reveal">
+      <div class="section-label mb-4">Reservasi Online</div>
+      <h2 class="section-title text-4xl md:text-5xl text-cream mb-4">Booking Sekarang</h2>
+      <div class="center-line mb-4"></div>
+      <p class="text-cream/50 text-sm">Isi form di bawah dan kami akan konfirmasi via WhatsApp</p>
+    </div>
+
+    <div class="bg-charcoal border border-white/8 rounded-sm p-8 md:p-12 reveal relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-64 h-64 bg-crimson/5 rounded-full blur-3xl pointer-events-none"></div>
+
+      <form id="booking-form" onsubmit="handleBooking(event)">
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <label class="form-label">Nama Lengkap *</label>
+            <input type="text" id="b-nama" class="form-input" placeholder="Masukkan nama Anda" required />
+          </div>
+          <div>
+            <label class="form-label">Nomor WhatsApp Anda *</label>
+            <input type="tel" id="b-wa" class="form-input" placeholder="08xx-xxxx-xxxx" required />
+          </div>
+          <div>
+            <label class="form-label">Pilih Outlet *</label>
+            <select id="b-outlet" class="form-input" required>
+              <option value="">-- Pilih Outlet --</option>
+              <option value="Lidah Kulon">Outlet #1 – Lidah Kulon</option>
+              <option value="MERR">Outlet #2 – Ruko Citi 9, MERR</option>
+            </select>
+          </div>
+          <div>
+            <label class="form-label">Pilih Barber *</label>
+            <select id="b-barber" class="form-input" required>
+              <option value="">-- Pilih Barber --</option>
+              </select>
+          </div>
+          <div class="md:col-span-2">
+            <label class="form-label">Pilih Layanan *</label>
+            <select id="b-layanan" class="form-input" required>
+              <option value="">-- Pilih Layanan --</option>
+              <optgroup label="Layanan Utama">
+                <option value="Haircut Reguler (Rp 50rb)">Haircut Reguler – Rp 50.000</option>
+                <option value="Haircut Premium (Rp 75rb)">Haircut Premium – Rp 75.000</option>
+                <option value="Haircut Exclusive (Rp 125rb)">Haircut Exclusive – Rp 125.000</option>
+              </optgroup>
+              <optgroup label="Wanita">
+                <option value="Haircut Wanita (Rp 75rb)">Haircut Wanita – Rp 75.000</option>
+                <option value="Haircut Premium Wanita (Rp 100rb)">Haircut Premium Wanita – Rp 100.000</option>
+              </optgroup>
+              <optgroup label="Layanan Tambahan">
+                <option value="Cuci Styling / Catok (Rp 55rb)">Cuci Styling / Catok – Rp 55.000</option>
+                <option value="Creambath (Rp 65rb)">Creambath – Rp 65.000</option>
+                <option value="Ear Candle (Rp 35rb)">Ear Candle – Rp 35.000</option>
+                <option value="Face Massage (Rp 50rb)">Face Massage – Rp 50.000</option>
+                <option value="Coloring/Perm/Smoothing">Coloring / Perm / Smoothing (Mulai Rp 100rb)</option>
+              </optgroup>
+            </select>
+          </div>
+          <div>
+            <label class="form-label">Tanggal *</label>
+            <input type="date" id="b-tanggal" class="form-input" required />
+          </div>
+          <div>
+            <label class="form-label">Jam *</label>
+            <select id="b-jam" class="form-input" required>
+              <option value="">-- Pilih Jam --</option>
+              <option>09.00</option><option>10.00</option><option>11.00</option>
+              <option>12.00</option><option>13.00</option><option>14.00</option>
+              <option>15.00</option><option>16.00</option><option>17.00</option>
+              <option>18.00</option><option>19.00</option><option>20.00</option>
+              <option>21.00</option><option>22.00</option><option>23.00</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mt-8 pt-8 border-t border-white/6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p class="text-cream/30 text-[0.65rem] italic">* Admin akan membalas chat untuk konfirmasi ketersediaan slot.</p>
+          <button type="submit" class="btn-primary text-sm px-10 w-full sm:w-auto">🗓️ Booking Sekarang</button>
+        </div>
+      </form>
+    </div>
+
+    <div id="booking-success" class="hidden mt-6 bg-green-900/20 border border-green-500/30 rounded-sm p-6 text-center">
+      <div class="text-cream font-display text-xl font-bold mb-2">Mengalihkan ke WhatsApp...</div>
+      <div class="text-cream/60 text-sm">Mohon tunggu sebentar.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="cta-section py-32 px-6 md:px-12">
+  <div class="max-w-4xl mx-auto text-center reveal">
+    <div class="section-label mb-6">Ready to Look Sharp?</div>
+    <h2 class="section-title text-5xl md:text-6xl text-cream mb-6">
+      Siap Tampil Lebih<br/><em class="text-crimson">Percaya Diri?</em>
+    </h2>
+    <p class="text-cream/60 mb-10 text-lg max-w-md mx-auto">Booking sekarang tanpa antri. Tim kami siap melayani Anda dengan standar terbaik.</p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="https://wa.me/6282225328882?text=Halo%20The%20Mafia%20Barbershop%2C%20saya%20ingin%20booking" 
+         target="_blank" class="btn-primary text-base px-12 py-4">
+        💬 Chat via WhatsApp
+      </a>
+      <a href="#booking" class="btn-outline text-base px-12 py-4">📅 Booking Online</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER / KONTAK ═══ -->
+<footer id="kontak" class="bg-obsidian border-t border-white/5 py-16 px-6 md:px-12">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid md:grid-cols-4 gap-10 mb-12">
+      <div class="md:col-span-2">
+        <a href="#beranda" class="flex items-center gap-3 mb-6 group">
+          <div class="w-12 h-12 rounded-full bg-crimson flex items-center justify-center overflow-hidden border-2 border-crimson/30 group-hover:border-crimson transition-all">
+            <img src="images/logo.jpg" alt="The Mafia Logo" class="w-full h-full object-cover">
+          </div>
+          <div>
+            <div class="font-display font-black text-cream text-lg tracking-wider leading-tight">THE MAFIA</div>
+            <div class="text-[0.6rem] tracking-[0.3em] text-crimson uppercase font-body font-bold">Barbershop</div>
+          </div>
+        </a>
+        <p class="text-cream/40 text-sm leading-relaxed mb-8 max-w-xs">
+          Solution for your hair. Premium barbershop dengan pengalaman grooming terbaik dan berkelas di Surabaya.
+        </p>
+        
+        <div class="flex gap-4">
+          <a href="https://instagram.com/themafiabarbershop.official" target="_blank" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-cream/60 hover:text-white hover:bg-crimson hover:border-crimson transition-all" title="Instagram">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="https://wa.me/6282225328882" target="_blank" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-cream/60 hover:text-white hover:bg-green-600 hover:border-green-600 transition-all" title="WhatsApp">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/@mafiabarbershop.official?is_from_webapp=1&sender_device=pc" target="_blank" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-cream/60 hover:text-white hover:bg-black hover:border-white/20 transition-all" title="TikTok">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 448 512">
+            <path d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25V349.38A162.55 162.55 0 1 1 185 188.31V278.2a74.62 74.62 0 1 0 52.23 71.18V0l88 0a121.18 121.18 0 0 0 1.86 22.17A122.18 122.18 0 0 0 381 102.39a121.43 121.43 0 0 0 67 20.14Z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <div class="font-body font-bold text-cream text-[0.7rem] tracking-[0.25em] uppercase mb-6 border-l-2 border-crimson pl-3">Lokasi</div>
+        <div class="space-y-5">
+          <a href="https://maps.app.goo.gl/N7fgaiMdnbdfNPtp9" target="_blank" class="block group">
+            <div class="text-crimson text-xs font-bold mb-1 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">Outlet #1 <span class="text-[10px]">↗</span></div>
+            <div class="text-cream/50 text-xs leading-relaxed group-hover:text-cream/80 transition-colors">Jl. Raya Lidah Kulon No. 2A, Surabaya</div>
+          </a>
+          <a href="https://maps.app.goo.gl/P2QkuyCajXd1iVb28" target="_blank" class="block group">
+            <div class="text-crimson text-xs font-bold mb-1 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">Outlet #2 <span class="text-[10px]">↗</span></div>
+            <div class="text-cream/50 text-xs leading-relaxed group-hover:text-cream/80 transition-colors">Ruko Citi 9, Jl. Dr. Ir. H. Soekarno, Gunung Anyar</div>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <div class="font-body font-bold text-cream text-[0.7rem] tracking-[0.25em] uppercase mb-6 border-l-2 border-crimson pl-3">Kontak & Jam</div>
+        <div class="space-y-4">
+          <a href="https://wa.me/6282225328882" target="_blank" class="flex items-center gap-3 group">
+            <div class="w-8 h-8 rounded-sm bg-white/5 flex items-center justify-center text-crimson group-hover:bg-crimson group-hover:text-white transition-all">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            </div>
+            <span class="text-cream/50 text-xs group-hover:text-cream transition-colors">0822 2532 8882</span>
+          </a>
+          <a href="https://instagram.com/themafiabarbershop.official" target="_blank" class="flex items-center gap-3 group">
+            <div class="w-8 h-8 rounded-sm bg-white/5 flex items-center justify-center text-crimson group-hover:bg-crimson group-hover:text-white transition-all">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            </div>
+            <span class="text-cream/50 text-xs group-hover:text-cream transition-colors">@themafiabarbershop.official</span>
+          </a>
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-sm bg-white/5 flex items-center justify-center text-crimson">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <span class="text-cream/50 text-xs uppercase tracking-tight">Setiap Hari: 09.00 – 00.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="fancy mb-8 opacity-20" />
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="text-cream/20 text-[10px] tracking-widest uppercase">© 2026 The Mafia Barbershop. All rights reserved.</div>
+      <div class="text-cream/20 text-[10px] tracking-widest uppercase">Elegance in every cut.</div>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/6282225328882?text=Halo%20The%20Mafia%20Barbershop%2C%20saya%20ingin%20booking%20layanan" 
+   target="_blank" class="fab-wa" aria-label="Chat WhatsApp">
+  <div class="wa-pulse"></div>
+  <svg class="w-6 h-6 text-white relative z-10" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+  </svg>
+  <span class="wa-tooltip">💬 Chat Admin</span>
+</a>
+ 
+<!-- Scroll to Top FAB -->
+<button id="fab-top" class="fab-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Kembali ke atas">
+  <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/>
+  </svg>
+</button>
+ 
+<script>
+  // ── ANNOUNCEMENT BAR: scroll ikut ke atas ──
+  let barClosed = false;
+  const annBar = document.getElementById('announcement-bar');
+  const navbar = document.getElementById('navbar');
+
+  function getBarH() {
+    return barClosed ? 0 : annBar.offsetHeight;
+  }
+
+  // Set navbar top on load
+  function initBarPosition() {
+    if (!barClosed) navbar.style.top = getBarH() + 'px';
+  }
+  initBarPosition();
+  window.addEventListener('resize', () => { if (!barClosed) initBarPosition(); });
+
+  window.addEventListener('scroll', () => {
+    if (barClosed) return;
+    const barH = getBarH();
+    const scrolled = window.scrollY;
+    if (scrolled >= barH) {
+      annBar.style.transform = 'translateY(-' + barH + 'px)';
+      navbar.style.top = '0px';
+    } else {
+      annBar.style.transform = 'translateY(-' + scrolled + 'px)';
+      navbar.style.top = (barH - scrolled) + 'px';
+    }
+  });
+
+  function closeAnnouncementBar() {
+    const barH = getBarH();
+    barClosed = true;
+    annBar.style.transform = 'translateY(-' + barH + 'px)';
+    navbar.style.top = '0px';
+  }
+
+  // ── PROMO BANNER SLIDER ──
+  let promoIndex = 0;
+  const promoTotal = 3;
+  let promoTimer;
+
+  function promoGoTo(n) {
+    promoIndex = n;
+    document.getElementById('promo-slider').style.transform = 'translateX(-' + (promoIndex * 100) + '%)';
+    document.querySelectorAll('.promo-dot').forEach((dot, i) => {
+      dot.style.background = i === promoIndex ? '#e11d48' : 'rgba(245,245,220,0.25)';
+      dot.style.width = i === promoIndex ? '24px' : '8px';
+    });
+    resetPromoTimer();
+  }
+
+  function promoSlide(dir) {
+    promoGoTo((promoIndex + dir + promoTotal) % promoTotal);
+  }
+
+  function resetPromoTimer() {
+    clearInterval(promoTimer);
+    promoTimer = setInterval(() => promoSlide(1), 5000);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => resetPromoTimer());
+
+  // ── GALLERY LIGHTBOX ──
+  const lbImages = [
+    { src: 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=1200&q=90', title: 'Fade Cut' },
+    { src: 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1200&q=90', title: 'Classic Taper' },
+    { src: 'images/pompadour.jpg', title: 'Pompadour' },
+    { src: 'https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&w=1200&q=90', title: 'Undercut' },
+    { src: 'images/outlet_lidah2.jpg', title: 'Premium Interior' },
+    { src: 'images/coloring.jpg', title: 'Hair Coloring' },
+    { src: 'images/beardtrim.jpg', title: 'Beard Sculpting' },
+    { src: 'images/outlet_mer.jpg', title: 'Outlet MERR' }
+  ];
+  let lbIndex = 0;
+
+  function buildLbDots() {
+    const dotsEl = document.getElementById('lightbox-dots');
+    dotsEl.innerHTML = '';
+    lbImages.forEach((_, i) => {
+      const d = document.createElement('button');
+      d.className = 'lb-dot' + (i === lbIndex ? ' active' : '');
+      d.onclick = (e) => { e.stopPropagation(); lbGoTo(i); };
+      dotsEl.appendChild(d);
+    });
+  }
+
+  function lbGoTo(n) {
+    lbIndex = (n + lbImages.length) % lbImages.length;
+    const img = document.getElementById('lightbox-img');
+    img.classList.add('transitioning');
+    setTimeout(() => {
+      img.src = lbImages[lbIndex].src;
+      document.getElementById('lightbox-title').textContent = lbImages[lbIndex].title;
+      img.classList.remove('transitioning');
+    }, 220);
+    buildLbDots();
+  }
+
+  function lbSlide(dir) { lbGoTo(lbIndex + dir); }
+
+  function openLightbox(index) {
+    lbIndex = index;
+    const lb = document.getElementById('gallery-lightbox');
+    const img = document.getElementById('lightbox-img');
+    img.src = lbImages[lbIndex].src;
+    document.getElementById('lightbox-title').textContent = lbImages[lbIndex].title;
+    buildLbDots();
+    lb.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    document.getElementById('gallery-lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function handleLightboxClick(e) {
+    if (e.target === document.getElementById('gallery-lightbox')) closeLightbox();
+  }
+
+  // Keyboard support
+  document.addEventListener('keydown', (e) => {
+    const lb = document.getElementById('gallery-lightbox');
+    if (!lb.classList.contains('active')) return;
+    if (e.key === 'ArrowLeft') lbSlide(-1);
+    if (e.key === 'ArrowRight') lbSlide(1);
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  // Touch/swipe support
+  let lbTouchStartX = 0;
+  document.getElementById('gallery-lightbox').addEventListener('touchstart', (e) => {
+    lbTouchStartX = e.touches[0].clientX;
+  }, { passive: true });
+  document.getElementById('gallery-lightbox').addEventListener('touchend', (e) => {
+    const diff = lbTouchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) lbSlide(diff > 0 ? 1 : -1);
+  }, { passive: true });
+</script>
+<script src="script.js"></script>
+</body>
+</html>
