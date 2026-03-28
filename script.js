@@ -55,7 +55,7 @@ function renderBarberGrid() {
     const card = document.createElement('div');
     card.className = 'barber-card reveal visible';
     card.innerHTML = `
-      <img src="${b.img}" alt="${b.nama}" class="barber-img">
+      <img src="${b.img}" alt="${b.nama}" class="barber-img" loading="lazy">
       <div class="barber-overlay">
         <div class="text-[10px] bg-crimson inline-block px-2 py-0.5 rounded-sm mb-1">${b.outlet}</div>
         <h3 class="font-display font-bold text-cream text-lg mb-0">${b.nama}</h3>
