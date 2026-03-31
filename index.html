@@ -88,6 +88,7 @@
       <a href="#tentang" class="nav-link">Tentang</a>
       <a href="#layanan" class="nav-link">Layanan</a>
       <a href="#barber" class="nav-link">Barber</a>
+      <a href="#review" class="nav-link">Review</a>
       <a href="#galeri" class="nav-link">Galeri</a>
       <a href="#booking" class="nav-link">Booking</a>
       <a href="#kontak" class="nav-link">Kontak</a>
@@ -109,6 +110,7 @@
       <a href="#tentang" class="nav-link py-3 px-4 border-b border-white/5" onclick="closeMenu()">Tentang Kami</a>
       <a href="#layanan" class="nav-link py-3 px-4 border-b border-white/5" onclick="closeMenu()">Layanan</a>
       <a href="#barber" class="nav-link py-3 px-4 border-b border-white/5" onclick="closeMenu()">Barber</a>
+      <a href="#review" class="nav-link py-3 px-4 border-b border-white/5" onclick="closeMenu()">Review</a>
       <a href="#galeri" class="nav-link py-3 px-4 border-b border-white/5" onclick="closeMenu()">Galeri</a>
       <a href="#booking" class="nav-link py-3 px-4 border-b border-white/5" onclick="closeMenu()">Booking</a>
       <a href="#kontak" class="nav-link py-3 px-4" onclick="closeMenu()">Kontak</a>
@@ -144,17 +146,17 @@
       <!-- Stats row -->
       <div class="flex gap-8 mb-10">
         <div>
-          <div class="font-display font-black text-3xl text-cream">4.9<span class="text-crimson text-xl">★</span></div>
+          <div class="font-display font-black text-3xl text-cream"><span data-count="4.9" data-suffix="★" class="text-cream">4.9★</span></div>
           <div class="text-cream/40 text-xs tracking-widest uppercase">Rating</div>
         </div>
         <div class="w-px bg-white/10"></div>
         <div>
-          <div class="font-display font-black text-3xl text-cream">2</div>
+          <div class="font-display font-black text-3xl text-cream"><span data-count="2">2</span></div>
           <div class="text-cream/40 text-xs tracking-widest uppercase">Outlet</div>
         </div>
         <div class="w-px bg-white/10"></div>
         <div>
-          <div class="font-display font-black text-3xl text-cream">10+</div>
+          <div class="font-display font-black text-3xl text-cream"><span data-count="10" data-suffix="+">10+</span></div>
           <div class="text-cream/40 text-xs tracking-widest uppercase">Barber Pro</div>
         </div>
       </div>
@@ -279,19 +281,19 @@
         </p>
         <div class="grid grid-cols-2 gap-6">
           <div class="bg-charcoal border border-white/6 p-5 rounded-sm">
-            <div class="text-crimson text-2xl font-display font-black mb-1">2</div>
+            <div class="text-crimson text-2xl font-display font-black mb-1"><span data-count="2">2</span></div>
             <div class="text-cream/50 text-xs tracking-widest uppercase">Outlet</div>
           </div>
           <div class="bg-charcoal border border-white/6 p-5 rounded-sm">
-            <div class="text-crimson text-2xl font-display font-black mb-1">500+</div>
+            <div class="text-crimson text-2xl font-display font-black mb-1"><span data-count="500" data-suffix="+">500+</span></div>
             <div class="text-cream/50 text-xs tracking-widest uppercase">Pelanggan Puas</div>
           </div>
           <div class="bg-charcoal border border-white/6 p-5 rounded-sm">
-            <div class="text-crimson text-2xl font-display font-black mb-1">15+</div>
+            <div class="text-crimson text-2xl font-display font-black mb-1"><span data-count="15" data-suffix="+">15+</span></div>
             <div class="text-cream/50 text-xs tracking-widest uppercase">Jenis Layanan</div>
           </div>
           <div class="bg-charcoal border border-white/6 p-5 rounded-sm">
-            <div class="text-crimson text-2xl font-display font-black mb-1">5★</div>
+            <div class="text-crimson text-2xl font-display font-black mb-1"><span data-count="5" data-suffix="★">5★</span></div>
             <div class="text-cream/50 text-xs tracking-widest uppercase">Standar Kualitas</div>
           </div>
         </div>
@@ -698,7 +700,7 @@
 </div>
 
 <!-- ═══ REVIEW ═══ -->
-<section class="review-section py-28 px-6 md:px-12">
+<section class="review-section py-28 px-6 md:px-12" id="review">
   <div class="max-w-7xl mx-auto">
     <div class="text-center mb-16 reveal">
       <div class="section-label mb-4">Kata Mereka</div>

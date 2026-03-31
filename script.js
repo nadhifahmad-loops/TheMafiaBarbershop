@@ -1,4 +1,4 @@
-  let menuOpen = false;
+let menuOpen = false;
   function toggleMenu() {
     menuOpen = !menuOpen;
     document.getElementById('mobile-menu').classList.toggle('open', menuOpen);
@@ -18,8 +18,11 @@
 
 // Show/hide scroll-to-top
 const fabTop = document.getElementById('fab-top');
+const fabWa = document.querySelector('.fab-wa');
 window.addEventListener('scroll', () => {
-  fabTop.classList.toggle('show', window.scrollY > window.innerHeight);
+  const shouldShow = window.scrollY > window.innerHeight;
+  fabTop.classList.toggle('show', shouldShow);
+  if (fabWa) fabWa.classList.toggle('scroll-up', shouldShow);
 });
 
 // 1. DATA MASTER BARBER (12 Personel)
@@ -175,3 +178,35 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+// ── COUNT-UP ANIMATION ──
+function animateCountUp(el) {
+  const raw = el.getAttribute('data-count');
+  const suffix = el.getAttribute('data-suffix') || '';
+  const prefix = el.getAttribute('data-prefix') || '';
+  const target = parseFloat(raw);
+  const isFloat = raw.includes('.');
+  const duration = 1800;
+  const startTime = performance.now();
+
+  function update(now) {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    // easeOutExpo
+    const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+    const current = target * ease;
+    el.textContent = prefix + (isFloat ? current.toFixed(1) : Math.floor(current)) + suffix;
+    if (progress < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+const countObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+      entry.target.classList.add('counted');
+      animateCountUp(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('[data-count]').forEach(el => countObserver.observe(el));
