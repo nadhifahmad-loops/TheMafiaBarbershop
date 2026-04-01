@@ -101,36 +101,64 @@ document.addEventListener('DOMContentLoaded', () => {
   // Listener change outlet
   document.getElementById('b-outlet').addEventListener('change', updateBarberSelect);
 
-  // Toggle Barber List
-  const toggleBarberBtn = document.getElementById('toggleBarberBtn');
-  toggleBarberBtn.addEventListener('click', () => {
-      barberExpanded = !barberExpanded;
-      renderBarberGrid();
-      document.getElementById('barberBtnText').textContent = barberExpanded ? "Tampilkan Sedikit" : "Lihat Semua Barber";
-      document.getElementById('barberBtnIcon').style.transform = barberExpanded ? "rotate(180deg)" : "rotate(0deg)";
-      if(barberExpanded) {
-           document.getElementById('barber-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-  });
+const toggleBarberBtn = document.getElementById('toggleBarberBtn');
+
+toggleBarberBtn.addEventListener('click', () => {
+    barberExpanded = !barberExpanded;
+    renderBarberGrid();
+
+    document.getElementById('barberBtnText').textContent =
+        barberExpanded ? "Tampilkan Sedikit" : "Lihat Semua Barber";
+
+    document.getElementById('barberBtnIcon').style.transform =
+        barberExpanded ? "rotate(180deg)" : "rotate(0deg)";
+
+    if (barberExpanded) {
+        document.getElementById('barber-grid').scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    } else {
+        document.getElementById('barber').scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+});
 
   // Toggle Services
-  const toggleBtn = document.getElementById('toggleBtn');
-  let servicesVisible = false;
-  toggleBtn.addEventListener('click', () => {
-      const hiddenServices = document.querySelectorAll('.hidden-service');
-      servicesVisible = !servicesVisible;
-      hiddenServices.forEach((item, index) => {
-          if(servicesVisible) {
-              item.style.display = 'block';
-              setTimeout(() => item.classList.add('show'), index * 50);
-          } else {
-              item.classList.remove('show');
-              setTimeout(() => item.style.display = 'none', 500);
-          }
-      });
-      document.getElementById('toggleText').textContent = servicesVisible ? "Tampilkan Lebih Sedikit" : "Lihat Lebih Banyak";
-      document.getElementById('toggleIcon').style.transform = servicesVisible ? "rotate(180deg)" : "rotate(0deg)";
-  });
+// Toggle Services
+const toggleBtn = document.getElementById('toggleBtn');
+let servicesVisible = false;
+
+toggleBtn.addEventListener('click', () => {
+    const hiddenServices = document.querySelectorAll('.hidden-service');
+    servicesVisible = !servicesVisible;
+
+    hiddenServices.forEach((item, index) => {
+        if(servicesVisible) {
+            item.style.display = 'block';
+            setTimeout(() => item.classList.add('show'), index * 50);
+        } else {
+            item.classList.remove('show');
+            setTimeout(() => item.style.display = 'none', 500);
+        }
+    });
+
+    document.getElementById('toggleText').textContent =
+        servicesVisible ? "Tampilkan Lebih Sedikit" : "Lihat Lebih Banyak";
+
+    document.getElementById('toggleIcon').style.transform =
+        servicesVisible ? "rotate(180deg)" : "rotate(0deg)";
+
+    // ✅ TAMBAHAN PENTING
+    if (!servicesVisible) {
+        document.getElementById('layanan').scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+});
 
   // Min Date
   const today = new Date().toISOString().split('T')[0];
