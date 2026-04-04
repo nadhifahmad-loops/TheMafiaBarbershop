@@ -25,65 +25,31 @@ window.addEventListener('scroll', () => {
   if (fabWa) fabWa.classList.toggle('scroll-up', shouldShow);
 });
 
-// 1. DATA MASTER BARBER (12 Personel)
+// DATA BARBER (untuk dropdown form booking)
 const barbers = [
   // OUTLET #1 - LIDAH KULON
-  { nama: "Rizal", outlet: "Lidah Kulon", exp: "5 Thn", spec: "Fade Expert", img: "https://images.unsplash.com/photo-1521119989659-a83eee488004" },
-  { nama: "Andi", outlet: "Lidah Kulon", exp: "4 Thn", spec: "Classic Cut", img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7" },
-  { nama: "Budi", outlet: "Lidah Kulon", exp: "3 Thn", spec: "Coloring", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e" },
-  { nama: "Dika", outlet: "Lidah Kulon", exp: "2 Thn", spec: "Modern Cut", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" },
-  { nama: "Erik", outlet: "Lidah Kulon", exp: "6 Thn", spec: "Senior Barber", img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce" },
-  { nama: "Fajar", outlet: "Lidah Kulon", exp: "4 Thn", spec: "Taper Expert", img: "https://images.unsplash.com/photo-1534030347209-467a5b0ad3e6" },
-
+  { nama: "Rizal", outlet: "Lidah Kulon", spec: "Fade Expert" },
+  { nama: "Andi", outlet: "Lidah Kulon", spec: "Classic Cut" },
+  { nama: "Budi", outlet: "Lidah Kulon", spec: "Coloring" },
+  { nama: "Dika", outlet: "Lidah Kulon", spec: "Modern Cut" },
+  { nama: "Erik", outlet: "Lidah Kulon", spec: "Senior Barber" },
+  { nama: "Fajar", outlet: "Lidah Kulon", spec: "Taper Expert" },
   // OUTLET #2 - MERR
-  { nama: "Gani", outlet: "MERR", exp: "5 Thn", spec: "Pompadour", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e" },
-  { nama: "Hadi", outlet: "MERR", exp: "3 Thn", spec: "Hair Tattoo", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d" },
-  { nama: "Irfan", outlet: "MERR", exp: "4 Thn", spec: "Shaving Pro", img: "https://images.unsplash.com/photo-1552058544-f2b08422138a" },
-  { nama: "Tukiyem", outlet: "MERR", exp: "5 Thn", spec: "Styling", img: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04" },
-  { nama: "Kevin", outlet: "MERR", exp: "2 Thn", spec: "Buzz Cut", img: "https://images.unsplash.com/photo-1480455624313-e29b44bbfde1" },
-  { nama: "Lutfi", outlet: "MERR", exp: "6 Thn", spec: "All Rounder", img: "https://images.unsplash.com/photo-1504257432389-52343af06ae3" }
+  { nama: "Gani", outlet: "MERR", spec: "Pompadour" },
+  { nama: "Hadi", outlet: "MERR", spec: "Hair Tattoo" },
+  { nama: "Irfan", outlet: "MERR", spec: "Shaving Pro" },
+  { nama: "Tukiyem", outlet: "MERR", spec: "Styling" },
+  { nama: "Kevin", outlet: "MERR", spec: "Buzz Cut" },
+  { nama: "Lutfi", outlet: "MERR", spec: "All Rounder" }
 ];
 
-// 2. RENDER BARBER KE GRID
-let barberLimit = 5; // Tampilkan 5 awal
-let barberExpanded = false;
-
-function renderBarberGrid() {
-  const grid = document.getElementById('barber-grid');
-  grid.innerHTML = '';
-
-  const itemsToShow = barberExpanded ? barbers : barbers.slice(0, barberLimit);
-
-  itemsToShow.forEach((b, i) => {
-    const card = document.createElement('div');
-    card.className = 'barber-card reveal visible';
-    card.innerHTML = `
-      <img src="${b.img}" alt="${b.nama}" class="barber-img" loading="lazy">
-      <div class="barber-overlay">
-        <div class="text-[10px] bg-crimson inline-block px-2 py-0.5 rounded-sm mb-1">${b.outlet}</div>
-        <h3 class="font-display font-bold text-cream text-lg mb-0">${b.nama}</h3>
-        <p class="text-crimson text-[10px] tracking-widest uppercase mb-1">${b.exp} Experience</p>
-        <p class="text-cream/50 text-[0.65rem] italic">${b.spec}</p>
-      </div>
-    `;
-    grid.appendChild(card);
-  });
-}
-
-// 3. FILTER BARBER BERDASARKAN OUTLET DI FORM
 function updateBarberSelect() {
   const outletSelect = document.getElementById('b-outlet');
   const barberSelect = document.getElementById('b-barber');
   const selectedOutlet = outletSelect.value;
-
-  // Default Lidah Kulon jika kosong
   const filterTarget = selectedOutlet === "" ? "Lidah Kulon" : selectedOutlet;
-
   barberSelect.innerHTML = '<option value="">-- Pilih Barber --</option>';
-
-  const filteredBarbers = barbers.filter(b => b.outlet === filterTarget);
-
-  filteredBarbers.forEach(b => {
+  barbers.filter(b => b.outlet === filterTarget).forEach(b => {
     const opt = document.createElement('option');
     opt.value = b.nama;
     opt.textContent = `${b.nama} (${b.spec})`;
@@ -91,40 +57,12 @@ function updateBarberSelect() {
   });
 }
 
-// 4. INIT & EVENT LISTENERS
+// INIT & EVENT LISTENERS
 document.addEventListener('DOMContentLoaded', () => {
-  // Set default outlet ke Lidah Kulon
+  // Set default outlet & isi dropdown barber
   document.getElementById('b-outlet').value = "Lidah Kulon";
   updateBarberSelect();
-  renderBarberGrid();
-
-  // Listener change outlet
   document.getElementById('b-outlet').addEventListener('change', updateBarberSelect);
-
-const toggleBarberBtn = document.getElementById('toggleBarberBtn');
-
-toggleBarberBtn.addEventListener('click', () => {
-    barberExpanded = !barberExpanded;
-    renderBarberGrid();
-
-    document.getElementById('barberBtnText').textContent =
-        barberExpanded ? "Tampilkan Sedikit" : "Lihat Semua Barber";
-
-    document.getElementById('barberBtnIcon').style.transform =
-        barberExpanded ? "rotate(180deg)" : "rotate(0deg)";
-
-    if (barberExpanded) {
-        document.getElementById('barber-grid').scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
-    } else {
-        document.getElementById('barber').scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
-    }
-});
 
   // Toggle Services
 // Toggle Services

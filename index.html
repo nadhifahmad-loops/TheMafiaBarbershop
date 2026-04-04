@@ -53,7 +53,7 @@
       <a href="#beranda" class="nav-link">Beranda</a>
       <a href="#tentang" class="nav-link">Tentang</a>
       <a href="#layanan" class="nav-link">Layanan</a>
-      <a href="#barber" class="nav-link">Barber</a>
+      <a href="#reward" class="nav-link">Reward</a>
       <a href="#review" class="nav-link">Review</a>
       <a href="#galeri" class="nav-link">Galeri</a>
       <a href="#booking" class="nav-link">Booking</a>
@@ -71,7 +71,7 @@
       <a href="#beranda" class="nav-link py-3 px-4 border-b border-white/5" onclick="closeMenu()">Beranda</a>
       <a href="#tentang" class="nav-link py-3 px-4 border-b border-white/5" onclick="closeMenu()">Tentang Kami</a>
       <a href="#layanan" class="nav-link py-3 px-4 border-b border-white/5" onclick="closeMenu()">Layanan</a>
-      <a href="#barber" class="nav-link py-3 px-4 border-b border-white/5" onclick="closeMenu()">Barber</a>
+      <a href="#reward" class="nav-link py-3 px-4 border-b border-white/5" onclick="closeMenu()">Reward</a>
       <a href="#review" class="nav-link py-3 px-4 border-b border-white/5" onclick="closeMenu()">Review</a>
       <a href="#galeri" class="nav-link py-3 px-4 border-b border-white/5" onclick="closeMenu()">Galeri</a>
       <a href="#booking" class="nav-link py-3 px-4 border-b border-white/5" onclick="closeMenu()">Booking</a>
@@ -82,15 +82,7 @@
 </nav>
 
 <!-- HERO WITH VIDEO -->
-<section id="beranda" class="hero-bg min-h-screen flex items-center relative overflow-hidden section-box-border">
-  <!-- VIDEO BACKGROUND -->
-  <div class="hero-video-wrap">
-    <video id="hero-video" autoplay muted loop playsinline preload="none" class="hero-video">
-      <source src="video/hero_compressed.mp4" type="video/mp4">
-    </video>
-    <div class="hero-video-overlay"></div>
-  </div>
-
+<section id="beranda" class="hero-bg min-h-screen flex items-center relative overflow-hidden">
   <div class="max-w-7xl mx-auto px-6 md:px-12 w-full pt-36 md:pt-28 pb-16 md:pb-20 grid md:grid-cols-2 gap-10 md:gap-16 items-center relative z-10">
     <div>
       <div class="live-badge mb-8">
@@ -99,7 +91,7 @@
       <h1 class="hero-title text-6xl md:text-8xl mb-6">THE<br/>MAFIA<br/><span style="font-style:italic">Barbershop</span></h1>
       <p class="text-cream/60 font-body text-lg mb-2 tracking-wide">Solution for your hair</p>
       <div class="red-line my-6"></div>
-      <p class="text-cream/50 font-body text-sm leading-relaxed mb-10 max-w-sm">Barbershop premium dengan konsep maskulin & elegan. Hadir di 2 lokasi strategis untuk melayani Anda dengan standar kelas dunia.</p>
+      <p class="text-cream/50 font-body text-sm leading-relaxed mb-10 max-w-sm">Barbershop reguler dengan konsep maskulin & elegan. Hadir di 2 lokasi strategis untuk melayani Anda dengan kualitas dan layanan terbaik.</p>
       <div class="flex gap-8 mb-10">
         <div>
           <div class="font-display font-black text-3xl text-cream"><span data-count="4.9" data-suffix="★">4.9★</span></div>
@@ -149,12 +141,6 @@
     </div>
   </div>
 
-  <!-- Video toggle btn -->
-  <button id="video-toggle" onclick="toggleHeroVideo()" class="video-toggle-btn" aria-label="Toggle video">
-    <svg id="video-icon-pause" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M6 4h4v16H6zm8 0h4v16h-4z"/></svg>
-    <svg id="video-icon-play" class="w-4 h-4 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-  </button>
-
   <div class="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 z-10">
     <div class="text-cream/30 text-xs tracking-widest uppercase">Scroll</div>
     <div class="w-px h-12 bg-gradient-to-b from-cream/30 to-transparent"></div>
@@ -183,13 +169,10 @@
         <div class="relative">
           <div class="bg-charcoal border border-white/8 rounded-sm p-10 text-center section-inner-box">
             <!-- Premium barber pole SVG -->
-            <svg width="80" height="80" viewBox="0 0 80 80" class="mx-auto mb-4" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="40" cy="40" r="38" fill="rgba(225,29,72,0.08)" stroke="rgba(225,29,72,0.25)" stroke-width="1"/>
-              <rect x="34" y="10" width="12" height="60" rx="6" fill="rgba(245,245,220,0.06)" stroke="rgba(245,245,220,0.2)" stroke-width="1"/>
-              <path d="M34 16 Q40 22 46 28 Q40 34 34 40 Q40 46 46 52 Q40 58 34 64" stroke="#e11d48" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-              <path d="M46 16 Q40 22 34 28 Q40 34 46 40 Q40 46 34 52 Q40 58 46 64" stroke="#f5f5dc" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.35"/>
-              <circle cx="40" cy="11" r="5" fill="#e11d48"/>
-              <circle cx="40" cy="69" r="5" fill="#e11d48"/>
+            <svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" class="mx-auto mb-4">
+              <circle cx="40" cy="40" r="38" fill="rgba(225,29,72,0.1)" stroke="rgba(225,29,72,0.3)" stroke-width="1"/>
+              <defs><clipPath id="circleClip"><circle cx="40" cy="40" r="32"/></clipPath></defs>
+              <image href="images/logo.jpg" x="8" y="8" width="64" height="64" clip-path="url(#circleClip)" preserveAspectRatio="xMidYMid slice"/>
             </svg>
             <div class="font-display text-cream text-2xl font-black mb-2">Mafia Style</div>
             <div class="text-crimson text-sm tracking-widest uppercase mb-6">Premium Grooming Experience</div>
@@ -375,19 +358,127 @@
   </div>
 </section>
 
-<!-- BARBER TEAM -->
-<section id="barber" class="py-28 px-6 md:px-12 bg-gradient-to-b from-charcoal/20 to-noir section-box-border">
-  <div class="scissors-watermark">✂</div>
+<!-- REWARD PROGRAM -->
+<section id="reward" class="py-28 px-6 md:px-12 bg-gradient-to-b from-charcoal/20 to-noir section-box-border">
   <div class="max-w-7xl mx-auto text-center">
     <div class="mb-16 reveal">
-      <div class="section-label mb-4">Tim Kami</div>
-      <h2 class="section-title text-4xl md:text-5xl text-cream mb-4">The Barber Squad</h2>
+      <div class="section-label mb-4">Apresiasi Pelanggan</div>
+      <h2 class="section-title text-4xl md:text-5xl text-cream mb-4">Loyalty Reward</h2>
       <div class="ornament-line mb-4"><span class="diamond-dot"></span></div>
-      <p class="text-cream/50 text-sm max-w-md mx-auto">Barber profesional berpengalaman dari Lidah Kulon & MERR</p>
+      <p class="text-cream/50 text-sm max-w-md mx-auto">Semakin sering kamu datang, semakin besar reward yang kamu dapatkan. Kami menghargai setiap kunjunganmu.</p>
     </div>
-    <div id="barber-grid" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5"></div>
-    <div class="mt-12 reveal">
-      <button id="toggleBarberBtn" class="toggle-btn"><span id="barberBtnText">Lihat Semua Barber</span><span id="barberBtnIcon" class="arrow">↓</span></button>
+
+    <!-- Tier Cards -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-16">
+
+      <!-- Bronze -->
+      <div class="reward-tier-card reveal" style="--tier-color: #cd7f32;">
+        <div class="tier-icon-wrap">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-14 h-14 mx-auto">
+            <circle cx="32" cy="32" r="30" fill="rgba(205,127,50,0.1)" stroke="rgba(205,127,50,0.4)" stroke-width="1.5"/>
+            <path d="M32 16 L36 26 L48 26 L38 33 L42 43 L32 36 L22 43 L26 33 L16 26 L28 26 Z" fill="rgba(205,127,50,0.25)" stroke="#cd7f32" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="tier-badge" style="background: rgba(205,127,50,0.15); border-color: rgba(205,127,50,0.4); color: #cd7f32;">Bronze</div>
+        <div class="tier-visits">1 – 5 Kunjungan</div>
+        <ul class="tier-perks">
+          <li>✓ Gratis minuman saat tunggu</li>
+          <li>✓ Diskon 5% setiap kunjungan</li>
+          <li>✓ Akses promo member</li>
+        </ul>
+      </div>
+
+      <!-- Silver -->
+      <div class="reward-tier-card reveal" style="--tier-color: #a8a8a8; transition-delay: 0.1s;">
+        <div class="tier-icon-wrap">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-14 h-14 mx-auto">
+            <circle cx="32" cy="32" r="30" fill="rgba(168,168,168,0.1)" stroke="rgba(168,168,168,0.4)" stroke-width="1.5"/>
+            <path d="M32 14 L36.5 25 L49 25 L39 32.5 L43 44 L32 37 L21 44 L25 32.5 L15 25 L27.5 25 Z" fill="rgba(168,168,168,0.2)" stroke="#a8a8a8" stroke-width="1.5" stroke-linejoin="round"/>
+            <circle cx="32" cy="30" r="5" fill="rgba(168,168,168,0.2)" stroke="#a8a8a8" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="tier-badge" style="background: rgba(168,168,168,0.15); border-color: rgba(168,168,168,0.4); color: #c0c0c0;">Silver</div>
+        <div class="tier-visits">6 – 15 Kunjungan</div>
+        <ul class="tier-perks">
+          <li>✓ Semua benefit Bronze</li>
+          <li>✓ Diskon 10% setiap kunjungan</li>
+          <li>✓ 1x gratis cuci rambut/bulan</li>
+          <li>✓ Priority booking</li>
+        </ul>
+      </div>
+
+      <!-- Gold -->
+      <div class="reward-tier-card reward-tier-featured reveal" style="--tier-color: #c9a84c; transition-delay: 0.2s;">
+        <div class="tier-popular-badge">Terpopuler</div>
+        <div class="tier-icon-wrap">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-14 h-14 mx-auto">
+            <circle cx="32" cy="32" r="30" fill="rgba(201,168,76,0.15)" stroke="rgba(201,168,76,0.5)" stroke-width="1.5"/>
+            <path d="M32 12 L37 24 L51 24 L40 33 L44.5 46 L32 38 L19.5 46 L24 33 L13 24 L27 24 Z" fill="rgba(201,168,76,0.25)" stroke="#c9a84c" stroke-width="1.8" stroke-linejoin="round"/>
+            <circle cx="32" cy="30" r="6" fill="rgba(201,168,76,0.3)" stroke="#c9a84c" stroke-width="1.2"/>
+          </svg>
+        </div>
+        <div class="tier-badge" style="background: rgba(201,168,76,0.2); border-color: rgba(201,168,76,0.6); color: #c9a84c;">Gold</div>
+        <div class="tier-visits">16 – 30 Kunjungan</div>
+        <ul class="tier-perks">
+          <li>✓ Semua benefit Silver</li>
+          <li>✓ Diskon 15% setiap kunjungan</li>
+          <li>✓ 1x gratis haircut/bulan</li>
+          <li>✓ Hadiah ulang tahun spesial</li>
+          <li>✓ Akses early promo eksklusif</li>
+        </ul>
+      </div>
+
+      <!-- Platinum -->
+      <div class="reward-tier-card reveal" style="--tier-color: #e11d48; transition-delay: 0.3s;">
+        <div class="tier-icon-wrap">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-14 h-14 mx-auto">
+            <circle cx="32" cy="32" r="30" fill="rgba(225,29,72,0.12)" stroke="rgba(225,29,72,0.5)" stroke-width="1.5"/>
+            <path d="M32 10 L38 23 L53 23 L41.5 32.5 L46 46 L32 37.5 L18 46 L22.5 32.5 L11 23 L26 23 Z" fill="rgba(225,29,72,0.2)" stroke="#e11d48" stroke-width="2" stroke-linejoin="round"/>
+            <polygon points="32,22 34.5,29 42,29 36,33.5 38.5,41 32,36.5 25.5,41 28,33.5 22,29 29.5,29" fill="rgba(225,29,72,0.35)" stroke="#e11d48" stroke-width="0.8"/>
+          </svg>
+        </div>
+        <div class="tier-badge" style="background: rgba(225,29,72,0.15); border-color: rgba(225,29,72,0.5); color: #e11d48;">Platinum</div>
+        <div class="tier-visits">31+ Kunjungan</div>
+        <ul class="tier-perks">
+          <li>✓ Semua benefit Gold</li>
+          <li>✓ Diskon 20% setiap kunjungan</li>
+          <li>✓ Layanan VIP tanpa antrian</li>
+          <li>✓ 1x gratis layanan premium/bulan</li>
+          <li>✓ Invite event eksklusif The Mafia</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Cara Bergabung -->
+    <div class="bg-charcoal/50 border border-white/8 rounded-sm p-10 reveal section-inner-box">
+      <div class="section-label mb-3">Cara Bergabung</div>
+      <h3 class="font-display font-black text-cream text-2xl md:text-3xl mb-8">Mulai Kumpulkan Poin Sekarang</h3>
+      <div class="grid sm:grid-cols-3 gap-8">
+        <div class="text-center">
+          <div class="w-12 h-12 rounded-full bg-crimson/15 border border-crimson/30 flex items-center justify-center mx-auto mb-4">
+            <span class="text-crimson font-display font-black text-lg">1</span>
+          </div>
+          <div class="text-cream font-bold text-sm mb-2">Daftar Member</div>
+          <div class="text-cream/40 text-xs leading-relaxed">Hubungi admin via WhatsApp dan daftarkan nomor HP kamu sebagai member The Mafia.</div>
+        </div>
+        <div class="text-center">
+          <div class="w-12 h-12 rounded-full bg-crimson/15 border border-crimson/30 flex items-center justify-center mx-auto mb-4">
+            <span class="text-crimson font-display font-black text-lg">2</span>
+          </div>
+          <div class="text-cream font-bold text-sm mb-2">Kunjungi & Cukur</div>
+          <div class="text-cream/40 text-xs leading-relaxed">Setiap kali kamu berkunjung dan menggunakan layanan, kunjungan kamu akan tercatat otomatis.</div>
+        </div>
+        <div class="text-center">
+          <div class="w-12 h-12 rounded-full bg-crimson/15 border border-crimson/30 flex items-center justify-center mx-auto mb-4">
+            <span class="text-crimson font-display font-black text-lg">3</span>
+          </div>
+          <div class="text-cream font-bold text-sm mb-2">Nikmati Reward</div>
+          <div class="text-cream/40 text-xs leading-relaxed">Naiki tier dan nikmati berbagai keuntungan eksklusif mulai dari diskon hingga layanan gratis.</div>
+        </div>
+      </div>
+      <div class="mt-10">
+        <a href="https://wa.me/6282225328882?text=Halo%20The%20Mafia%2C%20saya%20mau%20daftar%20member%20reward" target="_blank" rel="noopener" class="btn-primary inline-block">Daftar Member Sekarang</a>
+      </div>
     </div>
   </div>
 </section>
@@ -542,15 +633,6 @@
     if (!annBar) return;
     const barH = getBarH(); barClosed = true;
     annBar.style.transform = 'translateY(-'+barH+'px)'; if (navbar) navbar.style.top = '0px';
-  }
-
-  // Hero video toggle
-  function toggleHeroVideo() {
-    const v = document.getElementById('hero-video');
-    const pause = document.getElementById('video-icon-pause');
-    const play = document.getElementById('video-icon-play');
-    if (v.paused) { v.play(); pause.classList.remove('hidden'); play.classList.add('hidden'); }
-    else { v.pause(); pause.classList.add('hidden'); play.classList.remove('hidden'); }
   }
 
   // Gallery Lightbox
