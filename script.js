@@ -151,7 +151,14 @@ function animateCountUp(el) {
   const prefix = el.getAttribute('data-prefix') || '';
   const target = parseFloat(raw);
   const isFloat = raw.includes('.');
-  const duration = 1800;
+
+  // Durasi proporsional dengan angka (log scale):
+  // angka kecil (2, 5) = ~600ms, angka besar (500, 1000) = ~3000ms
+  const minDuration = 600;
+  const maxDuration = 3000;
+  const scale = Math.log10(target + 1) / Math.log10(1000);
+  const duration = Math.min(maxDuration, Math.max(minDuration, scale * maxDuration));
+
   const startTime = performance.now();
 
   function update(now) {
