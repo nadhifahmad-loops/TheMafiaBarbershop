@@ -117,14 +117,32 @@ function handleBooking(e) {
       catatan: document.getElementById('b-catatan').value
   };
 
+  // Format tanggal jadi lebih readable: 2026-04-10 → 10 April 2026
+  const tgl = new Date(data.tanggal);
+  const hariList = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+  const bulanList = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+  const tanggalFormatted = `${hariList[tgl.getDay()]}, ${tgl.getDate()} ${bulanList[tgl.getMonth()]} ${tgl.getFullYear()}`;
+
   let waAdmin = data.outlet === "MERR" ? "6285385858626" : "6282225328882";
-  const catatanLine = data.catatan ? `\n📝 Catatan: ${data.catatan}` : '';
-  const text = `Halo The Mafia 💈\nBooking Reservasi:\n👤 Nama: ${data.nama}\n📍 Outlet: ${data.outlet}\n💇 Barber: ${data.barber}\n✂️ Layanan: ${data.layanan}\n📅 Tanggal: ${data.tanggal}\n⏰ Jam: ${data.jam} WIB${catatanLine}`;
+  const catatanLine = data.catatan ? `\n📝 Catatan    : ${data.catatan}` : '';
+
+  const text =
+`💈 *BOOKING RESERVASI*
+━━━━━━━━━━━━━━━━━━━━
+👤 Nama      : ${data.nama}
+📍 Outlet    : ${data.outlet}
+💇 Barber    : ${data.barber}
+✂️ Layanan   : ${data.layanan}
+📅 Tanggal   : ${tanggalFormatted}
+⏰ Jam       : ${data.jam} WIB${catatanLine}
+━━━━━━━━━━━━━━━━━━━━
+Mohon konfirmasi ketersediaan slot. Terima kasih! 🙏`;
 
   document.getElementById('booking-success').classList.remove('hidden');
   setTimeout(() => {
       window.open(`https://wa.me/${waAdmin}?text=${encodeURIComponent(text)}`, '_blank');
       e.target.reset();
+      updateBarberSelect();
       document.getElementById('booking-success').classList.add('hidden');
   }, 1000);
 }
