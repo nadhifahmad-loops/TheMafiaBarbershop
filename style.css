@@ -533,6 +533,8 @@
   .form-input:focus { border-color: #e11d48; background: rgba(225,29,72,0.04); }
   .form-input::placeholder { color: rgba(245,245,220,0.3); }
   .form-input option { background: #1a1a1a; color: #f5f5dc; }
+  .form-input optgroup { background: #111111; color: #e11d48; font-style: normal; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; }
+  .form-input optgroup option { background: #1a1a1a; color: #f5f5dc; font-weight: 400; padding-left: 1rem; }
   .form-label {
     font-family: 'Barlow', sans-serif;
     font-size: 0.65rem;
@@ -803,27 +805,6 @@
     display: none;
   }
 
-  /* ── PROMO SLIDER: top & bottom glow lines ── */
-  .promo-slide-wrapper {
-    position: relative;
-  }
-  .promo-slide-wrapper::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(to right, transparent, rgba(201,168,76,0.5), rgba(225,29,72,0.5), transparent);
-    z-index: 2;
-  }
-  .promo-slide-wrapper::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(to right, transparent, rgba(225,29,72,0.5), rgba(201,168,76,0.5), transparent);
-    z-index: 2;
-  }
-
   /* ── BARBER TEAM section ── */
   #barber {
     position: relative;
@@ -846,13 +827,6 @@
     position: absolute;
     inset: 40px;
     pointer-events: none;
-  }
-  .review-section::after {
-    content: '';
-    position: absolute;
-    top: 40px; left: 40px; right: 40px;
-    height: 1px;
-    background: linear-gradient(to right, transparent, rgba(225,29,72,0.2), transparent);
   }
 
   /* ── GALLERY section ── */
