@@ -1,6 +1,6 @@
 {
   "extends": [
-    "development"
+    "web-recommended"
   ],
   "hints": {
     "axe/forms": [
@@ -35,6 +35,7 @@
           "-webkit-user-drag"
         ]
       }
-    ]
+    ],
+    "html-checker": "off"
   }
 }
